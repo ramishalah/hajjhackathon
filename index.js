@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const morgan = require('morgan');
-const jwt = require('jsonwebtoken');
 
 
 // connecting to the clear db database
