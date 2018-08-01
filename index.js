@@ -238,27 +238,21 @@ app.get('/api/volunteer', function (req, res) {
 //
 // });
 //
-// // to get the a specific faculty member
-// app.get('/faculty/:facultyId', verifyToken, function (req, res) {
-//
-//     jwt.verify(req.token, 'helloworld', function (err, data) {
-//         if (err) {
-//             res.sendStatus(403);
-//         } else {
-//             var sql = `select * from faculty where id_faculty = ${req.params.facultyId}`;
-//
-//             con.query(sql, function (err, rows, fields) {
-//                 if (err) {
-//                     res.send(err);
-//                 } else {
-//                     res.send(rows);
-//                 }
-//             })
-//         }
-//     });
-//
-//
-// });
+// to get the a specific faculty member
+app.get('/api/volunteer/:volunteerId', function (req, res) {
+
+            var sql = `select * from volunteer where idvolunteer = ${req.params.volunteerId}`;
+
+            con.query(sql, function (err, rows, fields) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(rows);
+                }
+            });
+
+
+});
 //
 // // to get the a specific education.
 // app.get('/education/:facultyId', verifyToken, function (req, res) {
