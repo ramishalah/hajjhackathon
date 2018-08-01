@@ -247,7 +247,7 @@ app.get('/api/volunteer/:volunteerId', function (req, res) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.send(rows);
+                    res.send(rows[0]);
                 }
             });
 
