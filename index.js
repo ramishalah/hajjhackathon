@@ -10,10 +10,10 @@ const jwt = require('jsonwebtoken');
 // connecting to the clear db database
 var con = mysql.createPool({
     connectionLimit: 10,
-    host: "us-cdbr-iron-east-05.cleardb.net",
-    user: "bd5e1294bfda78",
-    password: "1ab708b1",
-    database: "heroku_24f121bc0d498a9"
+    host: "us-cdbr-iron-east-01.cleardb.net",
+    user: "ba7173b462c95c",
+    password: "143027ed",
+    database: "heroku_2bbd7ece8c31b0e"
 });
 
 
@@ -21,6 +21,8 @@ var app = express();
 
 // to allow the cross origin thing.
 app.use(cors());
+
+
 // to parse the request body
 app.use(bodyParser.json());
 
@@ -29,8 +31,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 
-// to serve the static files
-app.use(express.static('images'));
 
 // app.post('/api/login', (req, res) => {
 //     // Mock user (request with data base and then you get the user back)
@@ -1108,7 +1108,6 @@ app.post('/signup', function (req, res) {
         email: req.body.email,
         password: req.body.password
     };
-
 
     var sql = 'INSERT INTO faculty SET ?';
 
