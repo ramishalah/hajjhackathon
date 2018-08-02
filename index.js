@@ -75,6 +75,49 @@ app.get('/api/volunteer/:volunteerId', function (req, res) {
 });
 
 
+app.get('/api/sectorsvolunteers', function (req, res) {
+
+    var sectors = [];
+    var volunteers = [];
+
+    var sql = 'select * from sector';
+    con.query(sql, function (err, rows, fields) {
+        if (err) {
+            res.send(err);
+        } else {
+            sectors = rows;
+
+
+            // getting the volunteers table
+            var sql = 'select * from volunteer';
+            con.query(sql, function (err, rows, fields) {
+                if(err) {
+                    res.send(err);
+                } else {
+                    volunteers = rows;
+
+                    var sectorsvolunteers = [];
+                    // doing the the custom object
+                    for(var i = 0; i < sectors.length; i++) {
+                        for(var j = 0; j < volunteers.length; j++) {
+                            if(sectors[i].idsector == volunteers[j].idsector) {
+                                sectorsvolunteers.push(volunteers[j]);
+                            }
+                        }
+                        sectors[i].volunteers = sectorsvolunteers;
+                    }
+
+                    res.send(sectors);
+                }
+            })
+        }
+    });
+
+
+
+})
+
+
 // // to  get all the admin table
 // app.get('/admin', verifyToken, function (req, res) {
 //     jwt.verify(req.token, 'helloworld', function (err, data) {
