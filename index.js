@@ -105,6 +105,7 @@ app.get('/api/sectorsvolunteers', function (req, res) {
                             }
                         }
                         sectors[i].volunteers = sectorsvolunteers;
+                        sectorsvolunteers = [];
                     }
 
                     res.send(sectors);
