@@ -46,27 +46,6 @@ app.use(morgan('dev'));
 // });
 
 
-// Verify token
-// function verifyToken(req, res, next) {
-//     // Get auth header value
-//     const bearerHeader = req.headers['authorization'];
-//
-//     // Check if bearer is undefined
-//     if (bearerHeader) {
-//         // Split at the space
-//         const bearer = bearerHeader.split(' ');
-//         // Get token from array
-//         const bearerToken = bearer[1];
-//         // Set the token
-//         req.token = bearerToken;
-//         // proceed
-//         next();
-//     } else {
-//         // Forbidden
-//         res.sendStatus(403);
-//     }
-//
-// }
 
 
 // to  get all the faculty table
@@ -79,6 +58,20 @@ app.get('/api/volunteer', function (req, res) {
                     res.send(rows);
                 }
             });
+});
+
+// to get the a specific volunteer member
+app.get('/api/volunteer/:volunteerId', function (req, res) {
+
+    var sql = `select * from volunteer where idvolunteer = ${req.params.volunteerId}`;
+
+    con.query(sql, function (err, rows, fields) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(rows[0]);
+        }
+    });
 });
 
 
@@ -238,21 +231,7 @@ app.get('/api/volunteer', function (req, res) {
 //
 // });
 //
-// to get the a specific faculty member
-app.get('/api/volunteer/:volunteerId', function (req, res) {
 
-            var sql = `select * from volunteer where idvolunteer = ${req.params.volunteerId}`;
-
-            con.query(sql, function (err, rows, fields) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send(rows[0]);
-                }
-            });
-
-
-});
 //
 // // to get the a specific education.
 // app.get('/education/:facultyId', verifyToken, function (req, res) {
