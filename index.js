@@ -45,7 +45,9 @@ app.use(morgan('dev'));
 //    });
 // });
 
+function arrangeMe() {
 
+}
 
 
 // to  get all the faculty table
@@ -113,10 +115,47 @@ app.get('/api/sectorsvolunteers', function (req, res) {
             })
         }
     });
+});
+
+app.put('/api/changestatus/:idvolunteer/:status', function (req, res) {
+    var status = req.params.status;
+    var sql;
+    var table_data = {
+        status: req.params.status
+    };
+
+    var sql = 'UPDATE volunteer SET ? WHERE idvolunteer = ?';
 
 
+    con.query(sql, [table_data, req.params.idvolunteer], function (err, rows, fields) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({
+                message: "Successful"
+            })
+        }
+    })
+});
 
-})
+app.put('/api/editlocation/:idvolunteer/:lat/:lng', function (req, res) {
+    var table_data = {
+        lat: req.params.lat,
+        lng: req.params.lng
+    };
+
+    var sql = 'UPDATE volunteer SET ? WHERE idvolunteer = ?';
+
+    con.query(sql, [table_data, req.params.idvolunteer], function (err, rows, fields) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({
+                message: "Successful"
+            })
+        }
+    })
+});
 
 
 // // to  get all the admin table
@@ -528,34 +567,8 @@ app.get('/api/sectorsvolunteers', function (req, res) {
 //     });
 // });
 //
-// // to edit a membership
-// app.put('/editMembership', verifyToken, function (req, res) {
-//     jwt.verify(req.token, 'helloworld', function (err, data) {
-//         if (err) {
-//             res.sendStatus(403);
-//         } else {
-//             var table_data = {
-//                 position: req.body.position,
-//                 url: req.body.url,
-//                 name: req.body.name,
-//                 expire_date: req.body.expire_date,
-//                 is_visible: req.body.is_visible
-//             };
-//
-//             var sql = 'UPDATE membership SET ? WHERE id_membership = ? AND id_faculty = ?';
-//
-//             con.query(sql, [table_data, req.body.id_membership, data.data], function (err, rows, fields) {
-//                 if (err) {
-//                     res.send(err);
-//                 } else {
-//                     res.json({
-//                         message: "Successful"
-//                     })
-//                 }
-//             })
-//         }
-//     });
-// });
+// to edit a membership
+
 //
 // // to delete a membership
 // app.delete('/deleteMembership', verifyToken, function (req, res) {
