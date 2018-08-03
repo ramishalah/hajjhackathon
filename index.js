@@ -31,22 +31,9 @@ app.use(morgan('dev'));
 
 
 
-// app.post('/api/login', (req, res) => {
-//     // Mock user (request with data base and then you get the user back)
-//     const user = {
-//         id: 1,
-//         username: "rami",
-//         email: "rami@gmail.com"
-//     };
-//    jwt.sign({user:user}, 'helloworld', function (err, token) {
-//        res.json({
-//            token: token
-//        })
-//    });
-// });
 
 function arrangeMe() {
-
+    
 }
 
 
