@@ -148,7 +148,7 @@ app.put('/api/editlocation/:idvolunteer/:lat/:lng', function (req, res) {
 app.put('/api/volunteerarrived', function (req, res) {
 
 
-    var sql = 'update volunteer set idsector = 11 order by idvolunteer desc limit 1';
+    var sql = 'update volunteer set idsector = 11 where idsector = 1 order by idvolunteer desc limit 1';
 
     con.query(sql, function (err, rows, fields) {
         if (err) {
