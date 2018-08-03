@@ -33,7 +33,7 @@ app.use(morgan('dev'));
 
 
 function arrangeMe() {
-    
+
 }
 
 
@@ -148,20 +148,21 @@ app.put('/api/editlocation/:idvolunteer/:lat/:lng', function (req, res) {
 app.put('/api/volunteerarrived', function (req, res) {
 
 
-    var sql = 'delete from volunteer order by idvolunteer desc limit 1';
+    var sql = 'update volunteer set idsector = 11 order by idvolunteer desc limit 1';
 
     con.query(sql, function (err, rows, fields) {
         if (err) {
             res.send(err);
         } else {
-            var sql = 'insert into volunteer (`lat`, `lng`, `status`, `name`, `nationalid`, `category`, `idsector`) values (21.23423, 39.9433, "available", "yarob", 213213, "2", 11)'
-            con.query(sql, function (err, rows, fields) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send(rows);
-                }
-            })
+            res.send(rows);
+            // var sql = 'insert into volunteer (`lat`, `lng`, `status`, `name`, `nationalid`, `category`, `idsector`) values (21.23423, 39.9433, "available", "yarob", 213213, "2", 11)'
+            // con.query(sql, function (err, rows, fields) {
+            //     if (err) {
+            //         res.send(err);
+            //     } else {
+            //         res.send(rows);
+            //     }
+            // })
         }
     })
 });
